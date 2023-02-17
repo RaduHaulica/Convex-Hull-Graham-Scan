@@ -150,6 +150,15 @@
   <ItemGroup>
     <Font Include="Roboto-Bold.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\graham scan algorithm.png" />
+    <Image Include="media\graham scan final.png" />
+    <Image Include="media\graham scan main.gif" />
+    <Image Include="media\graham scan points.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Utility.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

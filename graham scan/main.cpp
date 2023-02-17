@@ -3,51 +3,7 @@
 #include <iostream>
 #include <string>
 
-const float pi = 3.141592f;
-const float MAXY = 800.0f;
-
-sf::VertexArray createVertexArray(std::vector<sf::Vector2f> v, sf::Color color)
-{
-    sf::VertexArray va;
-    va.setPrimitiveType(sf::PrimitiveType::LinesStrip);
-    for (int i = 0; i < v.size(); i++)
-    {
-        if (i == 0)
-        {
-            va.append(sf::Vertex(v[i], sf::Color::Red));
-        }
-        else
-        {
-            va.append(sf::Vertex(v[i], color));
-        }
-    }
-    return va;
-}
-
-float getAngle(sf::Vector2f point, sf::Vector2f offset)
-{
-    return atan2(-offset.y + point.y, -offset.x + point.x);
-}
-
-bool isLeftOf(sf::Vector2f origin1, sf::Vector2f origin2, sf::Vector2f point)
-{
-    sf::Vector2f segment = { -(origin2.y - origin1.y), origin2.x - origin1.x }; // B-A then rotate left
-    sf::Vector2f movedPoint = point - origin1; // C-A
-    float dotProduct = segment.x * movedPoint.x + segment.y * movedPoint.y;
-    if (dotProduct < 0)
-    {
-        //std::cout << "right" << std::endl;
-        return false;
-    }
-    //std::cout << "left" << std::endl;
-    return true;
-}
-
-sf::Vector2f getSecond(std::vector<sf::Vector2f> points)
-{
-    points.pop_back();
-    return points.back();
-}
+#include "Utility.h"
 
 int main()
 {
@@ -66,8 +22,8 @@ int main()
     helpText.setFillColor(sf::Color::White);
     helpText.setCharacterSize(12);
     helpText.setPosition({ 0,50 });
-    helpText.setString("Click or hold left mouse button to create points.\nPress right mouse button to start the algorithm visualization");
-    helpText.setScale({ 1,-1 }); // to account for y axis inverted
+    helpText.setString("Click or hold left mouse button to create points.\nPress right mouse button to start the algorithm visualization\nEsc - close");
+    helpText.setScale({ 1,-1 }); // to account for y axis being inverted
 
     sf::Vector2i mousePos;
     sf::Vector2f mousePosWorld;
@@ -81,9 +37,13 @@ int main()
     float inputCooldownAccumulator{ 0.0f };
     int pass{ 0 };
 
+
+    // points
     std::vector<sf::Vector2f> points;
     std::vector<sf::Vector2f> pointsStack;
     std::vector<sf::Vector2f> solutionStack;
+
+    // flags
     bool addPoint = false;
     bool enoughPoints = false;
     bool scanStarted = false;
@@ -101,7 +61,7 @@ int main()
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
-            //window.close();
+            window.close();
         }
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
@@ -143,6 +103,7 @@ int main()
             }
         }
 
+        // preparing data for running the algorithm, setting up containers, sorting points
         if (scanStarted && !scanInitialized)
         {
             // lowest y -> points[0]
@@ -193,6 +154,7 @@ int main()
             scanInitialized = true;
         }
 
+        // if pre-work is done, actual work is performed
         if (scanStarted && scanInitialized && sortedDisplayed && stepTimerAccumulator == 0 && pointsStack.size() > 0)
         {
             pass++;
@@ -203,6 +165,8 @@ int main()
             newPoint = pointsStack.back();
             pointsStack.pop_back();
 
+            // if adding the point maintains the convexity of the current polygon , push to solution stack
+            // if adding the point breaks the convexity of the current polygon, pop the last point in the stack and repeat this test
             if (isLeftOf(old, maybe, newPoint))
             {
                 solutionStack.push_back(newPoint);
