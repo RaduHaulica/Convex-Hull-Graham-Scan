@@ -1,13 +1,19 @@
-Graham scan is an algorithm that creates the convex hull of a given set of points.
- 
-Find the point with the lowest y coordinate, sort the rest of the points by angle with the x axis.
+## Convex hull - Graham's scan
 
-Process points in order, adding them to the convex hull if they are on the left of the line between the last two points in the hull.
+Graham's scan is one of the methods of calculating the convex hull of a point set. The convex hull is the smallest polygon that contains all the points in the set.
 
-When a concavity is found (currently processed point is on the right of the line between the last two points), pop points from the convex hull until the point is on the left of the line between the last two points in the hull.
+The applications of calculating a convex hull can vary from finding out the minimum length of fence required to protect Stonehenge from tourists to how much the T-1000 has to move in order to dodge the T-800's shotgun shells, which is to say avoid collision with a particle system without having to perform calculations for each individual element in the system.
+
+## Algorithm
+
+The solution is built on a stack, as it requires tracing back previous steps. The algorithm starts by finding the lowest point with the lowest y component in the set, which is marked as the starting point and pushed on the stack. All the other points are sorted based on the angle between the (x axis) and the (line they make with the starting point).
+
+The sorted points are processed in order, adding them to the convex hull (current solution stack) if they are on the left of the line between the last two points in the hull (which means that they don't break the convexity of the solution polygon).
+
+When a concavity is found (currently processed point is on the right of the line between the last two points), points are popped from the convex hull (current solution stack) until the currently processed point is on the left of the line between the last two points in the hull.
 
 ## How to use
 
 Click or hold left mouse button to add points to the set.
 
-Right click to start the algorithm.
+Right click to start the algorithm visualization.
