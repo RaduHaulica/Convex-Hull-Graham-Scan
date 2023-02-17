@@ -176,6 +176,7 @@ int main()
                 solutionStack.pop_back();
                 pointsStack.push_back(newPoint);
             }
+            // close off polygon once the set is iterated through - for drawing
             if (pointsStack.size() == 0)
             {
                 solutionStack.push_back(solutionStack[0]);
