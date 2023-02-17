@@ -2,7 +2,7 @@
 
 Graham's scan is one of the methods of calculating the convex hull of a point set. The convex hull is the smallest polygon that contains all the points in the set.
 
-![convex hull example]("./graham scan/media/graham scan example.png")
+![convex hull example](/graham scan/media/graham scan example.png)
 
 The applications of calculating a convex hull are varied:
 - calculating the spread of a contamination based on activated sensors
