@@ -16,7 +16,11 @@ The algorithm prepares the points then iterates through them (backtracking based
 
 ![Graham's scan animation](https://github.com/RaduHaulica/Graham-scan/blob/95f00578595580acc6f8a8cd11c99dcad9dee0cf/graham%20scan/media/graham%20scan%20main.gif)
 
-The solution is built on a stack, as it requires tracing back previous steps. The algorithm starts by finding the lowest point with the lowest y component in the set, which is marked as the starting point and pushed on the stack. All the other points are sorted based on the angle between the (x axis) and the (line they make with the starting point).
+The solution is built on a stack, as it requires tracing back previous steps.
+
+The algorithm starts by finding the lowest point with the lowest y component in the set, which is marked as the starting point and pushed on the stack.
+
+All the other points are sorted based on the angle between the (x axis) and the (line they make with the starting point).
 
 ![Graham's scan initial points](https://github.com/RaduHaulica/Graham-scan/blob/95f00578595580acc6f8a8cd11c99dcad9dee0cf/graham%20scan/media/graham%20scan%20points.png)
 
