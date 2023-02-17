@@ -2,13 +2,13 @@
 
 Graham's scan is one of the methods of calculating the convex hull of a point set. The convex hull is the smallest polygon that contains all the points in the set.
 
-![convex hull example](/graham scan/media/graham scan example.png)
+![convex hull example](graham scan/media/graham scan example.png)
 
 The applications of calculating a convex hull are varied:
 - calculating the spread of a contamination based on activated sensors
 - optimizing robot motion (rudimentary pathfinding and obstacle avoidance)
 - finding out the minimum length of fence required to protect Stonehenge from tourists
-- how much the T-1000 has to move in order to dodge the T-800's shotgun shells, which is to say avoid collision with a group of objects without having to perform calculations for each individual element in the system.
+- how much the T-1000 has to move in order to dodge the T-800's shotgun shells (avoid collision with a group of objects without having to perform calculations for each individual element in the system)
 
 ## Algorithm
 
